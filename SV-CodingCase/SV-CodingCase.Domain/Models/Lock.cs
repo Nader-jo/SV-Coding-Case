@@ -12,6 +12,7 @@ namespace SV_CodingCase.Domain.Models
         public Guid BuildingId { get; set; }
 
         [JsonPropertyName("type")]
+        [JsonConverter(typeof(JsonStringEnumConverter))] 
         public LockType Type { get; set; }
 
         [JsonPropertyName("name")]

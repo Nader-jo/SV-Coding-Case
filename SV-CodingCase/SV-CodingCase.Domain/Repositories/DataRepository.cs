@@ -2,7 +2,6 @@
 using Microsoft.Extensions.Options;
 using SV_CodingCase.Domain.Models;
 using SV_CodingCase.Domain.Models.Configuration;
-using System;
 using System.Text.Json;
 
 namespace SV_CodingCase.Domain.Repositories
