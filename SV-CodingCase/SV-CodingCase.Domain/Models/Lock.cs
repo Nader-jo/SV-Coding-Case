@@ -1,5 +1,4 @@
-﻿using SV_CodingCase.Domain.Models.Enums;
-using System.Text.Json.Serialization;
+﻿using System.Text.Json.Serialization;
 
 namespace SV_CodingCase.Domain.Models
 {
