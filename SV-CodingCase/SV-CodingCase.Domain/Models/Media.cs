@@ -12,8 +12,7 @@ namespace SV_CodingCase.Domain.Models
         public Guid GroupId { get; set; }
 
         [JsonPropertyName("type")]
-        [JsonConverter(typeof(JsonStringEnumConverter))] 
-        public MediaType Type { get; set; }
+        public string Type { get; set; }
 
         [JsonPropertyName("owner")]
         public string Owner { get; set; }

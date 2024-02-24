@@ -15,8 +15,8 @@ namespace SV_CodingCase.Configuration
                 .AddMemoryCache()
                 .AddServices()
                 .AddRepositories()
+                .AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(AppDomain.CurrentDomain.GetAssemblies()))
                 .AddHealthChecks();
-            //.AddMediatR();
             return services;
         }
 
