@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
+using Microsoft.Extensions.FileProviders;
 using SV_CodingCase.Configuration;
 using SV_CodingCase.Middleware;
 
@@ -21,9 +22,18 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+app.UseCors("CorsPolicy");
 app.UseAuthorization();
 app.MapControllers();
+app.UseFileServer(new FileServerOptions
+{
+    FileProvider = new PhysicalFileProvider(
+                    Path.Combine(builder.Environment.ContentRootPath, "Web/")),
+    DefaultFilesOptions = { DefaultFileNames = new List<string> { "index.html" } },
+    EnableDefaultFiles = true
+});
 
+app.UseRouting();
 app.MapHealthChecks("/health", new HealthCheckOptions
 {
     ResultStatusCodes =

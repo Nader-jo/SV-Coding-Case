@@ -18,12 +18,13 @@ namespace SV_CodingCase.Domain.Services
 
         public async Task<SearchResultDto> Search(string searchInput)
         {
+            searchInput = searchInput.Trim();
             var rawData = await _dataRepository.GetData();
             var weights = InitializeDict(rawData);
 
             foreach (var item in rawData.Buildings)
             {
-                if (item.Name.Contains(searchInput, StringComparison.CurrentCultureIgnoreCase))
+                if (matchingStrings(item.Name, searchInput))
                 {
                     weights[item.Id] += _options.WeightsConfiguration.Building.Name;
                     foreach (var lockItem in rawData.Locks)
@@ -34,7 +35,7 @@ namespace SV_CodingCase.Domain.Services
                         }
                     }
                 }
-                if (item.ShortCut.Contains(searchInput, StringComparison.CurrentCultureIgnoreCase))
+                if (matchingStrings(item.ShortCut, searchInput))
                 {
                     weights[item.Id] += _options.WeightsConfiguration.Building.ShortCut;
                     foreach (var lockItem in rawData.Locks)
@@ -45,7 +46,7 @@ namespace SV_CodingCase.Domain.Services
                         }
                     }
                 }
-                if (item.Description.Contains(searchInput, StringComparison.CurrentCultureIgnoreCase))
+                if (matchingStrings(item.Description, searchInput))
                 {
                     weights[item.Id] += _options.WeightsConfiguration.Building.Description;
                     foreach (var lockItem in rawData.Locks)
@@ -70,7 +71,7 @@ namespace SV_CodingCase.Domain.Services
                         }
                     }
                 }
-                if (item.Description is not null && item.Description.Contains(searchInput, StringComparison.CurrentCultureIgnoreCase))
+                if (matchingStrings(item.Description, searchInput))
                 {
                     weights[item.Id] += _options.WeightsConfiguration.Group.Description;
                     foreach (var lockItem in rawData.Media)
@@ -84,46 +85,46 @@ namespace SV_CodingCase.Domain.Services
             }
             foreach (var item in rawData.Locks)
             {
-                if (item.Type.ToString().Contains(searchInput, StringComparison.CurrentCultureIgnoreCase))
+                if (matchingStrings(item.Type, searchInput))
                 {
                     weights[item.Id] += _options.WeightsConfiguration.Lock.Type;
                 }
-                if (item.Name.ToString().Contains(searchInput, StringComparison.CurrentCultureIgnoreCase))
+                if (matchingStrings(item.Name, searchInput))
                 {
                     weights[item.Id] += _options.WeightsConfiguration.Lock.Name;
                 }
-                if (item.SerialNumber.ToString().Contains(searchInput, StringComparison.CurrentCultureIgnoreCase))
+                if (matchingStrings(item.SerialNumber, searchInput))
                 {
                     weights[item.Id] += _options.WeightsConfiguration.Lock.SerialNumber;
                 }
-                if (item.Floor is not null && item.Floor.ToString().Contains(searchInput, StringComparison.CurrentCultureIgnoreCase))
+                if (matchingStrings(item.Floor, searchInput))
                 {
                     weights[item.Id] += _options.WeightsConfiguration.Lock.Floor;
                 }
-                if (item.RoomNumber.ToString().Contains(searchInput, StringComparison.CurrentCultureIgnoreCase))
+                if (matchingStrings(item.RoomNumber, searchInput))
                 {
                     weights[item.Id] += _options.WeightsConfiguration.Lock.RoomNumber;
                 }
-                if (item.Description is not null && item.Description.ToString().Contains(searchInput, StringComparison.CurrentCultureIgnoreCase))
+                if (matchingStrings(item.Description, searchInput))
                 {
                     weights[item.Id] += _options.WeightsConfiguration.Lock.Description;
                 }
             }
             foreach (var item in rawData.Media)
             {
-                if (item.Type.ToString().Contains(searchInput, StringComparison.CurrentCultureIgnoreCase))
+                if (matchingStrings(item.Type, searchInput))
                 {
                     weights[item.Id] += _options.WeightsConfiguration.Medium.Type;
                 }
-                if (item.Owner.ToString().Contains(searchInput, StringComparison.CurrentCultureIgnoreCase))
+                if (matchingStrings(item.Owner, searchInput))
                 {
                     weights[item.Id] += _options.WeightsConfiguration.Medium.Owner;
                 }
-                if (item.SerialNumber.ToString().Contains(searchInput, StringComparison.CurrentCultureIgnoreCase))
+                if (matchingStrings(item.SerialNumber, searchInput))
                 {
                     weights[item.Id] += _options.WeightsConfiguration.Medium.SerialNumber;
                 }
-                if (item.Description is not null && item.Description.ToString().Contains(searchInput, StringComparison.CurrentCultureIgnoreCase))
+                if (matchingStrings(item.Description, searchInput))
                 {
                     weights[item.Id] += _options.WeightsConfiguration.Medium.Description;
                 }
@@ -138,19 +139,19 @@ namespace SV_CodingCase.Domain.Services
 
             foreach (var item in rawData.Buildings)
             {
-                result.Buildings.Add(new BuidingSearchResultDto() { Weight = weights[item.Id], Building = item });
+                if (weights[item.Id] > 0) result.Buildings.Add(new BuidingSearchResultDto() {  Weight = weights[item.Id], Building = item });
             }
             foreach (var item in rawData.Locks)
             {
-                result.Locks.Add(new LockSearchResultDto() { Weight = weights[item.Id], Lock = item });
+                if (weights[item.Id] > 0) result.Locks.Add(new LockSearchResultDto() { Weight = weights[item.Id], Lock = item });
             }
             foreach (var item in rawData.Groups)
             {
-                result.Groups.Add(new GroupSearchResultDto() { Weight = weights[item.Id], Group = item });
+                if (weights[item.Id] > 0) result.Groups.Add(new GroupSearchResultDto() { Weight = weights[item.Id], Group = item });
             }
             foreach (var item in rawData.Media)
             {
-                result.Medium.Add(new MediumSearchResultDto() { Weight = weights[item.Id], Medium = item });
+                if (weights[item.Id] > 0) result.Medium.Add(new MediumSearchResultDto() { Weight = weights[item.Id], Medium = item });
             }
 
             return result;
@@ -179,5 +180,7 @@ namespace SV_CodingCase.Domain.Services
             }
             return result;
         }
+        private static bool matchingStrings(object str1, string str2) => 
+            str1 is not null && str1.ToString().Contains(str2, StringComparison.OrdinalIgnoreCase);
     }
 }
