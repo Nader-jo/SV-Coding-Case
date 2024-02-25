@@ -18,9 +18,6 @@ jobs:
       uses: actions/setup-dotnet@v3
       with:
         dotnet-version: 8.0.x
-    - name: setup FE path
-      run: sed -i 's/5031/8080/g' ./SV-CodingCase/SV-CodingCase/Web/script.js
-      shell: bash
     - name: Restore dependencies
       run: dotnet restore ./SV-CodingCase/SV-CodingCase.sln
     - name: Build

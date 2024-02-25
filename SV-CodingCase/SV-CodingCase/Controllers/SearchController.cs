@@ -11,7 +11,7 @@ namespace SV_CodingCase.Controllers
         [HttpGet]
         public async Task<IActionResult> Get(string searchInput)
         {
-            _logger.LogInformation("Get");
+            _logger.LogInformation("Searching for: " + searchInput);
             return HandleResult(await Mediator.Send(new SearchRequest.Request(searchInput)));
         }
     }
