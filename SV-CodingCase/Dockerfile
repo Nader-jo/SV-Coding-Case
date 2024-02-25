@@ -1,26 +1,25 @@
 #See https://aka.ms/customizecontainer to learn how to customize your debug container and how Visual Studio uses this Dockerfile to build your images for faster debugging.
 
 FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS base
-USER app
 WORKDIR /app
 EXPOSE 8080
 
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
-COPY ["./SV-CodingCase.csproj", "SV-CodingCase/"]
-RUN pwd && ls
-COPY ["../SV-CodingCase.Domain/SV-CodingCase.Domain.csproj", "SV-CodingCase.Domain/"]
-RUN dotnet restore "./SV-CodingCase/SV-CodingCase.csproj"
+
+COPY ["./SV-CodingCase/SV-CodingCase.Api.csproj", "SV-CodingCase/"]
+COPY ["./SV-CodingCase.Domain/SV-CodingCase.Domain.csproj", "SV-CodingCase.Domain/"]
+RUN dotnet restore "SV-CodingCase/SV-CodingCase.Api.csproj"
 COPY . .
 WORKDIR "/src/SV-CodingCase"
-RUN dotnet build "./SV-CodingCase.csproj" -c $BUILD_CONFIGURATION -o /app/build
+RUN dotnet build "./SV-CodingCase.Api.csproj" -c $BUILD_CONFIGURATION -o /app/build
 
 FROM build AS publish
 ARG BUILD_CONFIGURATION=Release
-RUN dotnet publish "./SV-CodingCase.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
+RUN dotnet publish "./SV-CodingCase.Api.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
 
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
-ENTRYPOINT ["dotnet", "SV-CodingCase.dll"]
+ENTRYPOINT ["dotnet", "SV-CodingCase.Api.dll"]
