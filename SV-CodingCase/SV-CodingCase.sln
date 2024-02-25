@@ -3,9 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.8.34525.116
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SV-CodingCase.Api", "SV-CodingCase\SV-CodingCase.Api.csproj", "{2B12E1E5-6DA7-4258-9544-0A5872771D43}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SV-CodingCase.Api", "SV-CodingCase\SV-CodingCase.Api.csproj", "{2B12E1E5-6DA7-4258-9544-0A5872771D43}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SV-CodingCase.Domain", "SV-CodingCase.Domain\SV-CodingCase.Domain.csproj", "{B33E7F78-99BE-45D9-A2BB-0CC21729895B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SV-CodingCase.Domain", "SV-CodingCase.Domain\SV-CodingCase.Domain.csproj", "{B33E7F78-99BE-45D9-A2BB-0CC21729895B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SV-CodingCase.Test", "SV-CodingCase.Test\SV-CodingCase.Test.csproj", "{0F9A7EBD-1D9F-4D3D-BFB2-75AF2F92FE1C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{B33E7F78-99BE-45D9-A2BB-0CC21729895B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B33E7F78-99BE-45D9-A2BB-0CC21729895B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B33E7F78-99BE-45D9-A2BB-0CC21729895B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0F9A7EBD-1D9F-4D3D-BFB2-75AF2F92FE1C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0F9A7EBD-1D9F-4D3D-BFB2-75AF2F92FE1C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0F9A7EBD-1D9F-4D3D-BFB2-75AF2F92FE1C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0F9A7EBD-1D9F-4D3D-BFB2-75AF2F92FE1C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
