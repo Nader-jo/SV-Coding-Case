@@ -1,6 +1,0 @@
-@SV_CodingCase_HostAddress = http://localhost:5031
-
-GET {{SV_CodingCase_HostAddress}}/weatherforecast/
-Accept: application/json
-
-###
