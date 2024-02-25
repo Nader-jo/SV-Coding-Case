@@ -8,10 +8,10 @@ EXPOSE 8080
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
-COPY ["SV-CodingCase/SV-CodingCase.csproj", "SV-CodingCase/"]
+COPY ["./SV-CodingCase.csproj", "SV-CodingCase/"]
 RUN pwd && ls
-COPY ["SV-CodingCase.Domain/SV-CodingCase.Domain.csproj", "SV-CodingCase.Domain/"]
-RUN dotnet restore "./SV-CodingCase/./SV-CodingCase.csproj"
+COPY ["../SV-CodingCase.Domain/SV-CodingCase.Domain.csproj", "SV-CodingCase.Domain/"]
+RUN dotnet restore "./SV-CodingCase/SV-CodingCase.csproj"
 COPY . .
 WORKDIR "/src/SV-CodingCase"
 RUN dotnet build "./SV-CodingCase.csproj" -c $BUILD_CONFIGURATION -o /app/build

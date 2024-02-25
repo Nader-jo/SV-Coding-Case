@@ -24,6 +24,7 @@ jobs:
       run: dotnet build ./SV-CodingCase/SV-CodingCase.sln --no-restore
     - name: Test
       run: dotnet test ./SV-CodingCase/SV-CodingCase.sln --no-build --verbosity normal
-
+    - name: Set Docker Context to Default
+      run: docker context use default
     - name: Build the Docker image
       run: docker build --file ./SV-CodingCase/SV-CodingCase/Dockerfile --tag SV-CodingCase:$(date +%s)
