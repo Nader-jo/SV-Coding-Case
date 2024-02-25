@@ -6,7 +6,7 @@ namespace SV_CodingCase.Controllers
     [ApiController]
     public class SearchController : BaseApiController
     {
-        public SearchController(ILogger<SearchController> logger) : base(logger){}
+        public SearchController(ILogger<SearchController> logger) : base(logger) { }
 
         [HttpGet]
         public async Task<IActionResult> Get(string searchInput)

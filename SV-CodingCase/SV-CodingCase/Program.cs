@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
 using Microsoft.Extensions.FileProviders;
 using SV_CodingCase.Configuration;
@@ -43,5 +44,14 @@ app.MapHealthChecks("/healthz", new HealthCheckOptions
         [HealthStatus.Unhealthy] = StatusCodes.Status503ServiceUnavailable
     }
 });
-
+if (!app.Environment.IsDevelopment())
+{
+    app.MapGet("/", () =>
+ new ContentResult
+ {
+     ContentType = "text/html",
+     Content = "<!DOCTYPE html><html lang=\"en\"><head><meta charset=\"UTF-8\" /><title>Search Page</title><link rel=\"stylesheet\" href=\"https://sv-coding-case.onrender.com/styles.css\" /></head><body><form id=\"searchForm\"><input type=\"text\" id=\"searchInput\" placeholder=\"Enter search query...\" /></form><div id=\"searchResults\"></div><script src=\"https://sv-coding-case.onrender.com/script.js\"></script></body></html>\r\n"
+ }
+);
+}
 app.Run();
