@@ -9,7 +9,7 @@ FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
 COPY ["SV-CodingCase/SV-CodingCase.csproj", "SV-CodingCase/"]
-RUN echo "$PWD"
+RUN pwd && ls
 COPY ["SV-CodingCase.Domain/SV-CodingCase.Domain.csproj", "SV-CodingCase.Domain/"]
 RUN dotnet restore "./SV-CodingCase/./SV-CodingCase.csproj"
 COPY . .
