@@ -27,4 +27,7 @@ jobs:
     - name: Set Docker Context to Default
       run: docker context use default
     - name: Build the Docker image
-      run: docker build --file ./SV-CodingCase/SV-CodingCase/Dockerfile --tag SV-CodingCase:$(date +%s)
+      env:
+        TAG: ${{ github.run_id }}
+      run: docker build --file ./SV-CodingCase/SV-CodingCase/Dockerfile --tag SV-CodingCase:$TAG
+
