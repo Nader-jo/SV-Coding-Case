@@ -3,7 +3,6 @@ using Microsoft.Extensions.Diagnostics.HealthChecks;
 using Microsoft.Extensions.FileProviders;
 using SV_CodingCase.Configuration;
 using SV_CodingCase.Middleware;
-using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
 StringReplacer.ReplaceStringInFile(Path.Combine(Directory.GetCurrentDirectory(), "Web/script.js"), "5031");
@@ -30,7 +29,7 @@ app.MapControllers();
 
 app.UseFileServer(new FileServerOptions
 {
-    FileProvider = new PhysicalFileProvider(Path.Combine(builder.Environment.ContentRootPath, "Web/")),
+    FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), "Web/")),
     EnableDefaultFiles = true
 });
 
