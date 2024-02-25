@@ -26,4 +26,4 @@ jobs:
       run: dotnet test ./SV-CodingCase/SV-CodingCase.sln --no-build --verbosity normal
 
     - name: Build the Docker image
-      run: docker build ./SV-CodingCase/SV-CodingCase --file Dockerfile --tag my-image-name:$(date +%s)
+      run: docker build --file ./SV-CodingCase/SV-CodingCase/Dockerfile --tag SV-CodingCase:$(date +%s)
