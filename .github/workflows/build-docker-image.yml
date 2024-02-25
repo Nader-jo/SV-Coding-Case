@@ -29,5 +29,5 @@ jobs:
     - name: Build the Docker image
       env:
         TAG: ${{ github.run_id }}
-      run: docker build ./SV-CodingCase/ --tag SV-CodingCase:$TAG
+      run: docker build ./SV-CodingCase/ --tag sv-coding-case:$TAG
 
