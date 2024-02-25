@@ -25,10 +25,7 @@ if (app.Environment.IsDevelopment())
 else
 {
     if (Environment.GetEnvironmentVariable("BASE_URL") is not null)
-    {
-        StringReplacer.ReplaceStringInFile(Path.Combine(Directory.GetCurrentDirectory(), "Web/script.js"), "http://localhost:5031", "BASE_URL");
         StringReplacer.ReplaceStringInFile(Path.Combine(Directory.GetCurrentDirectory(), "Web/script.js"), "http://localhost:8080", "BASE_URL");
-    }
 }
 
 app.UseCors("CorsPolicy");
