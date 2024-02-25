@@ -5,7 +5,7 @@ using SV_CodingCase.Configuration;
 using SV_CodingCase.Middleware;
 
 var builder = WebApplication.CreateBuilder(args);
-StringReplacer.ReplaceStringInFile(Path.Combine(Directory.GetCurrentDirectory(), "Web/script.js"), "5031");
+StringReplacer.ReplaceStringInFile(Path.Combine(Directory.GetCurrentDirectory(), "Web/script.js"), "5031", "ASPNETCORE_HTTP_PORTS");
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
@@ -21,6 +21,14 @@ if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
+}
+else
+{
+    if (Environment.GetEnvironmentVariable("BASE_URL") is not null)
+    {
+        StringReplacer.ReplaceStringInFile(Path.Combine(Directory.GetCurrentDirectory(), "Web/script.js"), "http://localhost:5031", "BASE_URL");
+        StringReplacer.ReplaceStringInFile(Path.Combine(Directory.GetCurrentDirectory(), "Web/script.js"), "http://localhost:8080", "BASE_URL");
+    }
 }
 
 app.UseCors("CorsPolicy");

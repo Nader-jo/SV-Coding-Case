@@ -2,9 +2,9 @@
 
 public class StringReplacer
 {
-    public static void ReplaceStringInFile(string filePath, string stringToReplace)
+    public static void ReplaceStringInFile(string filePath, string stringToReplace, string envVar)
     {
-        string? replacement = Environment.GetEnvironmentVariable("ASPNETCORE_HTTP_PORTS")!;
+        string? replacement = Environment.GetEnvironmentVariable(envVar)!;
 
         if (!string.IsNullOrEmpty(replacement) && !string.IsNullOrEmpty(filePath))
         {
