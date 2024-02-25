@@ -19,11 +19,11 @@ jobs:
       with:
         dotnet-version: 8.0.x
     - name: Restore dependencies
-      run: dotnet restore
+      run: dotnet restore ./SV-CodingCase/SV-CodingCase.sln
     - name: Build
-      run: dotnet build --no-restore
+      run: dotnet build ./SV-CodingCase/SV-CodingCase.sln --no-restore
     - name: Test
-      run: dotnet test --no-build --verbosity normal
+      run: dotnet test ./SV-CodingCase/SV-CodingCase.sln --no-build --verbosity normal
 
     - name: Build the Docker image
       run: docker build ./SV-CodingCase/SV-CodingCase --file Dockerfile --tag my-image-name:$(date +%s)
