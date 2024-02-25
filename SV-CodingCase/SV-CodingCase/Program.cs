@@ -30,14 +30,12 @@ app.MapControllers();
 
 app.UseFileServer(new FileServerOptions
 {
-    FileProvider = new PhysicalFileProvider(
-                    Path.Combine(builder.Environment.ContentRootPath, "Web/")),
-    DefaultFilesOptions = { DefaultFileNames = new List<string> { "index.html" } },
+    FileProvider = new PhysicalFileProvider(Path.Combine(builder.Environment.ContentRootPath, "Web/")),
     EnableDefaultFiles = true
 });
 
 app.UseRouting();
-app.MapHealthChecks("/health", new HealthCheckOptions
+app.MapHealthChecks("/healthz", new HealthCheckOptions
 {
     ResultStatusCodes =
     {
