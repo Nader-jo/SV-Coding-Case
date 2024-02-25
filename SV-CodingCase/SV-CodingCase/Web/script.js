@@ -3,13 +3,18 @@
     const searchInput = encodeURIComponent(
         document.getElementById("searchInput").value
     );
+    const resultsContainer = document.getElementById("searchResults");
+    
+    if (searchInput === "") {
+        resultsContainer.innerHTML = "";
+        return;
+    }
     const response = await fetch(
         `http://localhost:5031/api/v1/Search?searchInput=${searchInput}`
     );
     const data = await response.json();
 
-    const resultsContainer = document.getElementById("searchResults");
-    resultsContainer.innerHTML = "";
+    
     if (data.status === "success") {
         const { buildings, locks, groups, medium } = data.result;
         const allItems = [
@@ -18,7 +23,11 @@
             ...groups.map((item) => ({ ...item, type: "Group" })),
             ...medium.map((item) => ({ ...item, type: "Medium" })),
         ];
-
+        if (allItems.length == 0) {
+            resultsContainer.textContent = "No results found.";
+        } else {
+            resultsContainer.textContent = "";
+        }
         allItems.sort((a, b) => b.weight - a.weight);
 
         const unifiedList = document.createElement("ul");

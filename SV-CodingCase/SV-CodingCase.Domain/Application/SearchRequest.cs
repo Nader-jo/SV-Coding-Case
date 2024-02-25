@@ -20,7 +20,7 @@ namespace SV_CodingCase.Domain.Application
             public async Task<Result<SearchResultDto>> Handle(Request request, CancellationToken cancellationToken)
             {
                 var searchResult = await _searchService.Search(request.SearchInput);
-                 return Result<SearchResultDto>.Success(searchResult);
+                return Result<SearchResultDto>.Success(searchResult);
             }
         }
     }

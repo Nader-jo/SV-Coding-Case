@@ -139,7 +139,7 @@ namespace SV_CodingCase.Domain.Services
 
             foreach (var item in rawData.Buildings)
             {
-                if (weights[item.Id] > 0) result.Buildings.Add(new BuidingSearchResultDto() {  Weight = weights[item.Id], Building = item });
+                if (weights[item.Id] > 0) result.Buildings.Add(new BuidingSearchResultDto() { Weight = weights[item.Id], Building = item });
             }
             foreach (var item in rawData.Locks)
             {
@@ -180,7 +180,7 @@ namespace SV_CodingCase.Domain.Services
             }
             return result;
         }
-        private static bool matchingStrings(object str1, string str2) => 
+        private static bool matchingStrings(object str1, string str2) =>
             str1 is not null && str1.ToString().Contains(str2, StringComparison.OrdinalIgnoreCase);
     }
 }
