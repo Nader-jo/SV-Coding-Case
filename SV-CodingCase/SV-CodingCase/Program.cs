@@ -1,5 +1,4 @@
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
 using Microsoft.Extensions.FileProviders;
 using SV_CodingCase.Configuration;
@@ -46,12 +45,27 @@ app.MapHealthChecks("/healthz", new HealthCheckOptions
 });
 if (!app.Environment.IsDevelopment())
 {
-    app.MapGet("/", () =>
- new ContentResult
- {
-     ContentType = "text/html",
-     Content = "<!DOCTYPE html><html lang=\"en\"><head><meta charset=\"UTF-8\" /><title>Search Page</title><link rel=\"stylesheet\" href=\"https://sv-coding-case.onrender.com/styles.css\" /></head><body><form id=\"searchForm\"><input type=\"text\" id=\"searchInput\" placeholder=\"Enter search query...\" /></form><div id=\"searchResults\"></div><script src=\"https://sv-coding-case.onrender.com/script.js\"></script></body></html>\r\n"
- }
-);
+    app.MapGet("/", (HttpContext httpContext) =>
+    {
+        string? baseUrl = Environment.GetEnvironmentVariable("BASE_URL")!;
+        var html = @$"<!DOCTYPE html>
+<html lang=""en"">
+  <head>
+    <meta charset=""UTF-8"" />
+    <title>Search Page</title>
+    <link rel=""stylesheet"" href=""http://localhost:8080/styles.css"" />
+  </head>
+  <body>
+    <form id=""searchForm"">
+      <input type=""text"" id=""searchInput"" placeholder=""Enter search query..."" />
+    </form>
+    <div id=""searchResults""></div>
+    <script src=""http://localhost:8080/script.js""></script>
+  </body>
+</html>";
+        html = string.IsNullOrEmpty(baseUrl) ? html : html.Replace("http://localhost:8080", baseUrl);
+        httpContext.Response.ContentType = "text/html";
+        return Results.Content(html);
+    });
 }
 app.Run();
