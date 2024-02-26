@@ -5,6 +5,6 @@ namespace SV_CodingCase.Domain.Contract
     public class MediumSearchResultDto
     {
         public int Weight { get; set; }
-        public Media Medium { get; set; }
+        public Media Medium { get; set; } = default!;
     }
 }

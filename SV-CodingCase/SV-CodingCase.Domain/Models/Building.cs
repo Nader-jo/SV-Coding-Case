@@ -8,12 +8,12 @@ namespace SV_CodingCase.Domain.Models
         public Guid Id { get; set; }
 
         [JsonPropertyName("shortCut")]
-        public string ShortCut { get; set; }
+        public string ShortCut { get; set; } = default!;
 
         [JsonPropertyName("name")]
-        public string Name { get; set; }
+        public string Name { get; set; } = default!;
 
         [JsonPropertyName("description")]
-        public string Description { get; set; }
+        public string Description { get; set; } = default!;
     }
 }

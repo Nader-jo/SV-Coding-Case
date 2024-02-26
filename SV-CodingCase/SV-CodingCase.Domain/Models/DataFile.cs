@@ -5,15 +5,15 @@ namespace SV_CodingCase.Domain.Models
     public class DataFile
     {
         [JsonPropertyName("buildings")]
-        public List<Building> Buildings { get; set; }
+        public List<Building> Buildings { get; set; } = default!;
 
         [JsonPropertyName("locks")]
-        public List<Lock> Locks { get; set; }
+        public List<Lock> Locks { get; set; } = default!;
 
         [JsonPropertyName("groups")]
-        public List<Group> Groups { get; set; }
+        public List<Group> Groups { get; set; } = default!;
 
         [JsonPropertyName("media")]
-        public List<Media> Media { get; set; }
+        public List<Media> Media { get; set; } = default!;
     }
 }

@@ -24,7 +24,7 @@ namespace SV_CodingCase.Domain.Services
 
             foreach (var item in rawData.Buildings)
             {
-                if (matchingStrings(item.Name, searchInput))
+                if (MatchingStrings(item.Name, searchInput))
                 {
                     weights[item.Id] += _options.WeightsConfiguration.Building.Name;
                     foreach (var lockItem in rawData.Locks)
@@ -35,7 +35,7 @@ namespace SV_CodingCase.Domain.Services
                         }
                     }
                 }
-                if (matchingStrings(item.ShortCut, searchInput))
+                if (MatchingStrings(item.ShortCut, searchInput))
                 {
                     weights[item.Id] += _options.WeightsConfiguration.Building.ShortCut;
                     foreach (var lockItem in rawData.Locks)
@@ -46,7 +46,7 @@ namespace SV_CodingCase.Domain.Services
                         }
                     }
                 }
-                if (matchingStrings(item.Description, searchInput))
+                if (MatchingStrings(item.Description, searchInput))
                 {
                     weights[item.Id] += _options.WeightsConfiguration.Building.Description;
                     foreach (var lockItem in rawData.Locks)
@@ -60,7 +60,7 @@ namespace SV_CodingCase.Domain.Services
             }
             foreach (var item in rawData.Groups)
             {
-                if (item.Name.ToLower().Contains(searchInput.ToLower()))
+                if (MatchingStrings(item.Name, searchInput))
                 {
                     weights[item.Id] += _options.WeightsConfiguration.Building.Name;
                     foreach (var lockItem in rawData.Locks)
@@ -71,7 +71,7 @@ namespace SV_CodingCase.Domain.Services
                         }
                     }
                 }
-                if (matchingStrings(item.Description, searchInput))
+                if (MatchingStrings(item.Description, searchInput))
                 {
                     weights[item.Id] += _options.WeightsConfiguration.Group.Description;
                     foreach (var lockItem in rawData.Media)
@@ -85,46 +85,46 @@ namespace SV_CodingCase.Domain.Services
             }
             foreach (var item in rawData.Locks)
             {
-                if (matchingStrings(item.Type, searchInput))
+                if (MatchingStrings(item.Type, searchInput))
                 {
                     weights[item.Id] += _options.WeightsConfiguration.Lock.Type;
                 }
-                if (matchingStrings(item.Name, searchInput))
+                if (MatchingStrings(item.Name, searchInput))
                 {
                     weights[item.Id] += _options.WeightsConfiguration.Lock.Name;
                 }
-                if (matchingStrings(item.SerialNumber, searchInput))
+                if (MatchingStrings(item.SerialNumber, searchInput))
                 {
                     weights[item.Id] += _options.WeightsConfiguration.Lock.SerialNumber;
                 }
-                if (matchingStrings(item.Floor, searchInput))
+                if (MatchingStrings(item.Floor, searchInput))
                 {
                     weights[item.Id] += _options.WeightsConfiguration.Lock.Floor;
                 }
-                if (matchingStrings(item.RoomNumber, searchInput))
+                if (MatchingStrings(item.RoomNumber, searchInput))
                 {
                     weights[item.Id] += _options.WeightsConfiguration.Lock.RoomNumber;
                 }
-                if (matchingStrings(item.Description, searchInput))
+                if (MatchingStrings(item.Description, searchInput))
                 {
                     weights[item.Id] += _options.WeightsConfiguration.Lock.Description;
                 }
             }
             foreach (var item in rawData.Media)
             {
-                if (matchingStrings(item.Type, searchInput))
+                if (MatchingStrings(item.Type, searchInput))
                 {
                     weights[item.Id] += _options.WeightsConfiguration.Medium.Type;
                 }
-                if (matchingStrings(item.Owner, searchInput))
+                if (MatchingStrings(item.Owner, searchInput))
                 {
                     weights[item.Id] += _options.WeightsConfiguration.Medium.Owner;
                 }
-                if (matchingStrings(item.SerialNumber, searchInput))
+                if (MatchingStrings(item.SerialNumber, searchInput))
                 {
                     weights[item.Id] += _options.WeightsConfiguration.Medium.SerialNumber;
                 }
-                if (matchingStrings(item.Description, searchInput))
+                if (MatchingStrings(item.Description, searchInput))
                 {
                     weights[item.Id] += _options.WeightsConfiguration.Medium.Description;
                 }
@@ -180,7 +180,13 @@ namespace SV_CodingCase.Domain.Services
             }
             return result;
         }
-        private static bool matchingStrings(object str1, string str2) =>
-            str1 is not null && str1.ToString().Contains(str2, StringComparison.OrdinalIgnoreCase);
+        private static bool MatchingStrings(object? str1, string str2)
+        {
+            if (str1 is not null)
+            {
+                return str1.ToString()!.Contains(str2, StringComparison.OrdinalIgnoreCase);
+            }
+            return false;
+        }
     }
 }

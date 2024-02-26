@@ -11,21 +11,21 @@ namespace SV_CodingCase.Domain.Models
         public Guid BuildingId { get; set; }
 
         [JsonPropertyName("type")]
-        public string Type { get; set; }
+        public string Type { get; set; } = default!;
 
         [JsonPropertyName("name")]
-        public string Name { get; set; }
+        public string Name { get; set; } = default!;
 
         [JsonPropertyName("description")]
         public string? Description { get; set; }
 
         [JsonPropertyName("serialNumber")]
-        public string SerialNumber { get; set; }
+        public string SerialNumber { get; set; } = default!;
 
         [JsonPropertyName("floor")]
         public string? Floor { get; set; }
 
         [JsonPropertyName("roomNumber")]
-        public string RoomNumber { get; set; }
+        public string RoomNumber { get; set; } = default!;
     }
 }

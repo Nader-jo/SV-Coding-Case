@@ -34,7 +34,7 @@ namespace SV_CodingCase.Domain.Repositories
         }
         private async Task<T> CheckCacheAsync<T>(string key, Func<Task<T>> action) where T : class
         {
-            if (_memoryCache.TryGetValue(key, out object cachedValue))
+            if (_memoryCache.TryGetValue(key, out object? cachedValue))
             {
                 if (cachedValue is T cachedResult)
                 {

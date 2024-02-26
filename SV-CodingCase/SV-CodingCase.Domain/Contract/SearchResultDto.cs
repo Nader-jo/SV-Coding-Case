@@ -2,9 +2,9 @@
 {
     public class SearchResultDto
     {
-        public List<BuidingSearchResultDto> Buildings { get; set; }
-        public List<LockSearchResultDto> Locks { get; set; }
-        public List<GroupSearchResultDto> Groups { get; set; }
-        public List<MediumSearchResultDto> Medium { get; set; }
+        public List<BuidingSearchResultDto> Buildings { get; set; } = default!;
+        public List<LockSearchResultDto> Locks { get; set; } = default!;
+        public List<GroupSearchResultDto> Groups { get; set; } = default!;
+        public List<MediumSearchResultDto> Medium { get; set; } = default!;
     }
 }

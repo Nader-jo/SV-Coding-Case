@@ -4,24 +4,24 @@ namespace SV_CodingCase.Domain.Models.Configuration
 {
     public class ApplicationOptions
     {
-        public string DataSource { get; set; }
+        public string DataSource { get; set; } = default!;
         public int CachingExpirationTimeInSeconds { get; set; }
-        public WeightsConfiguration WeightsConfiguration { get; set; }
+        public WeightsConfiguration WeightsConfiguration { get; set; } = default!;
     }
 
     public partial class WeightsConfiguration
     {
         [JsonPropertyName("Building")]
-        public Building Building { get; set; }
+        public Building Building { get; set; } = default!;
 
         [JsonPropertyName("Lock")]
-        public Lock Lock { get; set; }
+        public Lock Lock { get; set; } = default!;
 
         [JsonPropertyName("Group")]
-        public Group Group { get; set; }
+        public Group Group { get; set; } = default!;
 
         [JsonPropertyName("Medium")]
-        public Medium Medium { get; set; }
+        public Medium Medium { get; set; } = default!;
     }
 
     public partial class Building
@@ -48,7 +48,7 @@ namespace SV_CodingCase.Domain.Models.Configuration
     public partial class Lock
     {
         [JsonPropertyName("buildingId")]
-        public Building BuildingId { get; set; }
+        public Building BuildingId { get; set; } = default!;
 
         [JsonPropertyName("Type")]
         public int Type { get; set; }
@@ -72,7 +72,7 @@ namespace SV_CodingCase.Domain.Models.Configuration
     public partial class Medium
     {
         [JsonPropertyName("GroupId")]
-        public Group GroupId { get; set; }
+        public Group GroupId { get; set; } = default!;
 
         [JsonPropertyName("Type")]
         public int Type { get; set; }
